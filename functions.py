@@ -91,3 +91,73 @@ def show_2img(img, img_):
     plt.title(f"Image transformée de taille de l'image : {img.shape}")
     plt.imshow(img_)
     plt.show()
+    
+def evaluate_loss(loss, y_true, y_pred):
+    val = np.array([loss(to_categorical(y_true[n], 8).astype('float32'),
+                         to_categorical(y_pred[n], 8).astype('float32')).numpy() 
+                    for n in range(len(y_pred))])
+    
+    print(f"Loss max : {val[i]}, loss min : {val[u]}, loss mean :{val.mean()}")
+    plt.figure(figsize=(15,6))
+    sns.violinplot(x=val)
+    plt.show()
+
+    i = val.argmax()
+    show_2img(y_true[i], y_pred[i])
+
+    u = val.argmin()
+    show_2img(y_true[u], y_pred[u])
+    
+def plt_learningcurve(model, metric):
+    loss = model.history['loss']
+    val_loss = model.history['val_loss']
+    metrics = model.history[metric]
+    val_metric = model.history[f'{metric}']
+
+    plt.figure(figsize=(20,9))
+    plt.subplot(1,2,1)
+    plt.plot(model.epoch, metrics)
+    plt.plot(model.epoch, val_metric)
+    plt.legend([metric,f'{metric}'])
+    
+    plt.subplot(1,2,2)
+    plt.plot(model.epoch, loss)
+    plt.plot(model.epoch, val_loss)
+    plt.legend(['Loss','Validation_Loss'])
+    
+
+def evaluate_loss(loss, y_true, y_pred):
+    val = np.array([loss(to_categorical(y_true[n], 8).astype('float32'),
+                         to_categorical(y_pred[n], 8).astype('float32')).numpy() 
+                    for n in range(len(y_pred))])
+    
+    
+    plt.figure(figsize=(15,6))
+    sns.violinplot(x=val)
+    plt.show()
+
+    i = val.argmax()
+    show_2img(y_true[i], y_pred[i])
+
+    u = val.argmin()
+    show_2img(y_true[u], y_pred[u])
+    print(f"Loss max : {val[i]}, loss min : {val[u]}, loss mean :{val.mean()}")
+    
+    
+    
+def plt_learningcurve(model, metric):
+    loss = model.history['loss']
+    val_loss = model.history['val_loss']
+    metrics = model.history[f'val_{metric}']
+    val_metric = model.history[f'{metric}']
+
+    plt.figure(figsize=(20,9))
+    plt.subplot(1,2,1)
+    plt.plot(model.epoch, metrics)
+    plt.plot(model.epoch, val_metric)
+    plt.legend([metric,f'{metric}'])
+    
+    plt.subplot(1,2,2)
+    plt.plot(model.epoch, loss)
+    plt.plot(model.epoch, val_loss)
+    plt.legend(['Loss','Validation_Loss'])

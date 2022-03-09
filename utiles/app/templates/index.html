@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>API de segmentation des images | Construction d'une voiture autonome</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../static/css/jumbotron-narrow.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="header clearfix">
+        <h3 class="text-muted">Computer Vision | Data segmentation </h3>
+      </div>
+
+      <div class="jumbotron">
+        <h1>Construction d'une voiture autonome 🚙</h1>
+        <br>
+        <p class="lead">Renseignez le nom de l'image</p>
+        <form action="/predict/" method="post">
+            <input type="text" class="form-control" id="MedInc" name="name_img" placeholder="ex : aachen_000000_000019">
+                <br>
+                <button type="submit" class="btn btn-primary">Lancez la segmentation </button>
+      
+      </div class="form-row">
+		</form>
+		<br>
+      <footer class="footer">
+              <span class="italic">Copyright &copy; <a href="https://github.com/Mickevin" target="_blank">Kévin Duranty</a> pour <a href="https://www.openclassrooms.com" target="_blank"> OpenClassrooms</a></span>
+      </footer>
+    </div> <!-- /container -->
+  </body>
+</html>

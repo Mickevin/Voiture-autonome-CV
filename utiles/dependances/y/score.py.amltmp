@@ -1,0 +1,35 @@
+import numpy as np
+from tensorflow.keras.models import load_model
+from azureml.core.model import Model
+from azureml.core import Workspace, Dataset, Datastore
+import matplotlib.pyplot as plt
+import json
+
+
+def init():
+    global model
+    keras_path = Model.get_model_path(model_name = 'Model_vgg_unet')
+        
+    try: 
+        model = load_model(keras_path)
+    except:
+        print("Keras model not working")
+
+        
+def run(data):
+    name = json.loads(data)['data']
+    #path_data = load_img_from_azure(name)[0]
+    #X = np.array(plt.imread(path_data))
+    
+    #return np.array([[i.argmax() for i in u] for u in model.predict(X[:1])[0].reshape((512, 1024, 8))])
+    return True
+
+
+def load_img_from_azure(name):
+    # Connection à l'espace de travail d'Azure
+    ws = Workspace(subscription_id="d5bb9744-4790-446f-b7e1-591e22995cc7",
+               resource_group="OpenClassrooms",
+               workspace_name="OC_IA")
+    # azureml-core version 1.0.72 ou supérieure obligatoire
+    datastore = Datastore.get(ws, 'workspaceblobstore')
+    #return Dataset.File.from_files((datastore, f'UI/data/{name}leftImg8bit.png')).download()
